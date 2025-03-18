@@ -15,8 +15,8 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
     <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json" />
-    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/icon-192x192.png') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="{{ settings()->company_name }}">
