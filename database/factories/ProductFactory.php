@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Product;
@@ -28,7 +29,7 @@ class ProductFactory extends Factory
             'id'                => Str::uuid(),
             'name'              => $this->faker->name,
             'code'              => Str::random(5),
-            'category_id'       => 1,
+            'category_id'       => Category::factory(),
             'brand_id'          => null,
             'slug'              => Str::slug($this->faker->name),
             'unit'              => 'pcs',
