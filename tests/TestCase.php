@@ -27,9 +27,9 @@ abstract class TestCase extends BaseTestCase
         return Role::find(1);
     }
 
-    protected function getMasterAdmin()
+    protected function getMasterAdmin(): ?User
     {
-        return User::find(1);
+        return User::whereEmail('admin@gmail.com')->first();
     }
 
     protected function loginAsAdmin($admin = false)
