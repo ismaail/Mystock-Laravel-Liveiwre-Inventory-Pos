@@ -61,7 +61,7 @@ class Index extends Component
     public function saveToDriveManually(string $filename): void
     {
         $fileData = Storage::get($filename);
-        Storage::cloud()->put(env('APP_NAME').'/'.$filename, $fileData);
+        Storage::cloud()->put(config('app.name') . '/' . $filename, $fileData);
 
         $this->alert('success', __('Backup saved to Google Drive successfully!'));
     }
@@ -89,7 +89,7 @@ class Index extends Component
             $drive = Storage::disk('google');
 
             // Get the path to the latest backup
-            $backupPath = Storage::allFiles(env('APP_NAME'));
+            $backupPath = Storage::allFiles(config('app.name'));
             $latestBackup = end($backupPath);
 
             // Upload the backup file to Google Drive
@@ -159,7 +159,7 @@ class Index extends Component
 
     public function render()
     {
-        $files = Storage::allFiles(env('APP_NAME'));
+        $files = Storage::allFiles(config('app.name'));
 
         return view('livewire.backup.index', [
             'backups' => $files,
