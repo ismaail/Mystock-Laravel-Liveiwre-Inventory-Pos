@@ -11,7 +11,7 @@ test('the livewire users component can be viewed', function () {
     $this->get(route('users.index'))
         ->assertStatus(200);
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->assertStatus(200)
         ->assertViewIs('livewire.users.index');
 });

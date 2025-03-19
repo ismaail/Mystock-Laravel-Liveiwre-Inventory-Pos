@@ -8,7 +8,7 @@ it('test adjustment list if can be rendred', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->assertOk()
         ->assertViewIs('livewire.adjustment.index');
 });
