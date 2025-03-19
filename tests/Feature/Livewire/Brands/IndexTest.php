@@ -11,7 +11,7 @@ test('the livewire brand component can be viewed', function () {
     $this->get(route('brands.index'))
         ->assertStatus(200);
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->assertOk()
         ->assertViewIs('livewire.brands.index');
 });

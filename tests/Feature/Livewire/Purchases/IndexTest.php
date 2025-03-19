@@ -8,7 +8,7 @@ it('test purchases list if can be rendred', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->assertOk()
         ->assertViewIs('livewire.purchase.index');
 });
