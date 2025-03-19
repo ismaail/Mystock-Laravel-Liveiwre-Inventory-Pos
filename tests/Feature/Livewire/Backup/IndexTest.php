@@ -8,7 +8,7 @@ it('test backup page if can be rendred', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->assertOk()
         ->assertViewIs('livewire.backup.index');
 });
@@ -17,7 +17,7 @@ it('can download a backup', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->call('downloadBackup', 'backup.zip')
         ->assertOk();
 
@@ -30,7 +30,7 @@ it('can delete a backup', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $this->livewire(Index::class)
+    Livewire::test(Index::class)
         ->call('delete', 'backup.zip');
 
     $backups = Storage::allFiles('backup');
