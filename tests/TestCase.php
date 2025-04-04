@@ -32,7 +32,7 @@ abstract class TestCase extends BaseTestCase
         return User::whereEmail('admin@gmail.com')->first();
     }
 
-    protected function loginAsAdmin($admin = false)
+    protected function loginAsAdmin(?User $admin = null): User
     {
         if ( ! $admin) {
             $admin = $this->getMasterAdmin();
