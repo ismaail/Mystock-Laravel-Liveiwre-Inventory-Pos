@@ -6,8 +6,6 @@ use App\Livewire\Customers\Edit;
 use App\Models\Customer;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the customers update component if working', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
@@ -23,12 +21,13 @@ it('tests the update customer component', function () {
     $customer = Customer::factory()->create();
 
     Livewire::test(Edit::class, ['id' => $customer->id])
-        ->set('customer.name', $customer->name)
-        ->set('customer.phone', $customer->phone)
+        ->set('customer', $customer)
+        ->set('name', 'John doe')
+        ->set('phone', '00000000000')
         ->call('update')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('customers', [
+    $this->assertDatabaseHas('customers', [
         'name'  => 'John doe',
         'phone' => '00000000000',
     ]);
@@ -41,11 +40,12 @@ it('tests the edit customer component validation', function () {
     $customer = Customer::factory()->create();
 
     Livewire::test(Edit::class, ['id' => $customer->id])
-        ->set('customer.name', '')
-        ->set('customer.phone', '')
+        ->set('customer', $customer)
+        ->set('name', '')
+        ->set('phone', '')
         ->call('update')
-        ->assertHasErrors(
-            ['customer.name' => 'required'],
-            ['customer.phone' => 'required'],
-        );
+        ->assertHasErrors([
+            'name' => 'required',
+            'phone' => 'required',
+        ]);
 });

@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\Livewire\Users\Create;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the user create if working', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
@@ -21,14 +19,14 @@ it('tests the create user component', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('user.name', 'John Doe')
-        ->set('user.phone', '00000000000')
-        ->set('user.email', 'admin@admin.com')
-        ->set('user.password', 'password')
+        ->set('name', 'John Doe')
+        ->set('phone', '00000000000')
+        ->set('email', 'admin@admin.com')
+        ->set('password', 'password')
         ->call('create')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('users', [
+    $this->assertDatabaseHas('users', [
         'name'     => 'John Doe',
         'phone'    => '00000000000',
         'email'    => 'admin@admin.com',
@@ -41,15 +39,15 @@ it('tests the create user component validation', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('user.name', '')
-        ->set('user.phone', '')
-        ->set('user.email', '')
-        ->set('user.password', '')
+        ->set('name', '')
+        ->set('phone', '')
+        ->set('email', '')
+        ->set('password', '')
         ->call('create')
-        ->assertHasErrors(
-            ['user.name' => 'required'],
-            ['user.phone'    => 'required'],
-            ['user.email'    => 'required'],
-            ['user.password' => 'required']
-        );
+        ->assertHasErrors([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 });
