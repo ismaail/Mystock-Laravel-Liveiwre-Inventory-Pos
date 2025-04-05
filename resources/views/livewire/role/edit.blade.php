@@ -29,12 +29,12 @@
                         </div>
                     </div>
                     <div class="py-2 grid grid-cols-3 gap-6">
-                        @foreach ($this->permissions as $permission)
+                        @foreach ($this->permissions as $permissionId => $permissionName)
                             <div>
-                                <input type="checkbox" id="permission-{{ $permission->id }}"
-                                    wire:model.live="selectedPermissions" value="{{ $permission->id }}"
-                                    {{ in_array($permission->id, $selectedPermissions) ? 'checked' : '' }}>
-                                <label for="permission-{{ $permission->id }}">{{ $permission->name }}</label>
+                                <input type="checkbox" id="permission-{{ $permissionId }}"
+                                    wire:model.live="selectedPermissions" value="{{ $permissionId }}"
+                                    {{ in_array($permissionId, $selectedPermissions) ? 'checked' : '' }}>
+                                <label for="permission-{{ $permissionId }}">{{ $permissionName }}</label>
                             </div>
                         @endforeach
                     </div>
