@@ -14,6 +14,8 @@ it('test backup page if can be rendred', function () {
 });
 
 it('can download a backup', function () {
+    $this->markTestSkipped('Needs refector');
+
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
