@@ -21,6 +21,10 @@ class Create extends Component
 
     public array $listsForFields = [];
 
+    public bool $isAllSelected = false;
+
+    public bool $isNoneSelected = false;
+
     public function mount(): void
     {
         $this->initListsForFields();

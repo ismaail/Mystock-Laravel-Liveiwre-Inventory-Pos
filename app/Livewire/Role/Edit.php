@@ -21,10 +21,16 @@ class Edit extends Component
 
     public array $listsForFields = [];
 
+    public array $selectedPermissions = [];
+
+    public bool $isAllSelected = false;
+
+    public bool $isNoneSelected = false;
+
     public function mount(Role $role): void
     {
         $this->role = $role;
-        $this->permissions = $this->role->permissions->pluck('id')->toArray();
+        $this->permissions = $this->role->permissions->pluck('name', 'id')->toArray();
         $this->initListsForFields();
     }
 
