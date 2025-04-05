@@ -1,4 +1,4 @@
-@props(['id' => null, 'maxWidth' => null])
+@props(['id' => null, 'maxWidth' => null, 'title' => 'Title', 'content' => 'Lorem Ipsum'])
 
 @php
     $id = $id ?? md5($attributes->wire('model'));
@@ -47,7 +47,7 @@
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-        @if ($title)
+        @if (($title))
             <div class="p-5 text-center sm:mt-0 sm:text-left">
                 <h2 class="text-lg font-bold text-gray-900">
                     {{ $title }}
