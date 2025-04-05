@@ -20,8 +20,6 @@ class Create extends Component
 
     public $createModal = false;
 
-    public Brand $brand;
-
     #[Validate('required', message: 'Please provide a name')]
     #[Validate('min:3', message: 'This name is too short')]
     #[Validate('unique:brands,name', message: 'The brand name has already been taken.')]
