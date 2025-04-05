@@ -18,11 +18,9 @@ class Edit extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    /** @var bool */
-    public $editModal = false;
+    public bool $editModal = false;
 
-    /** @var mixed */
-    public $category;
+    public Category $category;
 
     #[Validate('required', message: 'Please provide a name')]
     #[Validate('min:3', message: 'This name is too short')]

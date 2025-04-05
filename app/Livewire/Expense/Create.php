@@ -21,7 +21,7 @@ class Create extends Component
     use LivewireAlert;
     use WithModels;
 
-    public $createModal = false;
+    public bool $createModal = false;
 
     public Expense $expense;
 
