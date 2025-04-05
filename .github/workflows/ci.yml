@@ -1,34 +1,65 @@
-on: push
-name: CI
+name: run-tests
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - '.github/workflows/run-tests.yml'
+      - 'phpunit.xml'
+      - 'composer.json'
+
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.0
- 
+
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-latest ]
+        php: [ 8.2 ]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+
     services:
-      mysql:
-        image: mysql:5.7
+      mysql_test:
+        image: mysql:8.0
         env:
+          MYSQL_DATABASE: my_stock_test
+          MYSQL_USER: tester
+          MYSQL_PASSWORD: test
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: test
-        ports:
-          - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
- 
+
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
- 
-    - name: Install composer dependencies
-      run: |
-        composer install --no-scripts
- 
-    - name: Prepare Laravel Application
-      run: |
-        cp .env.ci .env
-        php artisan key:generate
- 
-    - name: Run Testsuite
-      run: vendor/bin/phpunit tests/
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - name: create database.sqlite file
+        run: touch database/database.sqlite
+
+      - name: Install dependencies
+        run: |
+          composer update --prefer-dist --no-interaction
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Copy .evn file
+        run: cp .env.example .env
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Execute phpunit
+        run: vendor/bin/pest --no-coverage
