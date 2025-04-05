@@ -21,7 +21,7 @@ class CurrencyFactory extends Factory
         return [
             'name'   => $this->faker->name(),
             'code'   => $this->faker->currencyCode(),
-            'locale' => $this->faker->currencyLocal(),
+            'locale' => $this->faker->countryCode(),
         ];
     }
 }
