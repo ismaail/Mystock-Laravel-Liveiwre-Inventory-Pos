@@ -15,10 +15,9 @@ class Edit extends Component
 {
     use LivewireAlert;
 
-    public $editModal = false;
+    public bool $editModal = false;
 
-    /** @var mixed */
-    public $currency;
+    public Currency $currency;
 
     #[Validate('required', message: 'The name field cannot be empty.')]
     #[Validate('min:3', message: 'The name must be at least 3 characters.')]
