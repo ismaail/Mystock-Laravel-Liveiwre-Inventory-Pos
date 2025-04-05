@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\Livewire\Categories\Create;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the category create if working', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
@@ -21,11 +19,11 @@ it('tests the create category validation rules', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('category.name', 'apple')
+        ->set('name', 'apple')
         ->call('create')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('categories', [
+    $this->assertDatabaseHas('categories', [
         'name' => 'apple',
     ]);
 });
@@ -35,9 +33,9 @@ it('tests the create category component validation', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('category.name', '')
+        ->set('name', '')
         ->call('create')
         ->assertHasErrors(
-            ['category.name' => 'required'],
+            ['name' => 'required'],
         );
 });

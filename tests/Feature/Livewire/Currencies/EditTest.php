@@ -6,8 +6,6 @@ use App\Livewire\Currency\Edit;
 use Livewire\Livewire;
 use App\Models\Currency;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the currency edit if working', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
@@ -23,13 +21,14 @@ it('tests the update currency can component', function () {
     $currency = Currency::factory()->create();
 
     Livewire::test(Edit::class, ['id' => $currency->id])
-        ->set('currency.name', 'Us Dollar')
-        ->set('currency.code', 'USD')
-        ->set('currency.locale', '$')
+        ->set('currency', $currency)
+        ->set('name', 'Us Dollar')
+        ->set('code', 'USD')
+        ->set('locale', '$')
         ->call('update')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('currencies', [
+    $this->assertDatabaseHas('currencies', [
         'name'   => 'Us Dollar',
         'code'   => 'USD',
         'locale' => '$',
@@ -43,13 +42,14 @@ it('tests the edit user component validation', function () {
     $currency = Currency::factory()->create();
 
     Livewire::test(Edit::class, ['id' => $currency->id])
-        ->set('currency.name', '')
-        ->set('currency.code', '')
-        ->set('currency.locale', '')
+        ->set('currency', $currency)
+        ->set('name', '')
+        ->set('code', '')
+        ->set('locale', '')
         ->call('update')
-        ->assertHasErrors(
-            ['currency.name' => 'required'],
-            ['currency.code'   => 'required'],
-            ['currency.locale' => 'required'],
-        );
+        ->assertHasErrors([
+            'name' => 'required',
+            'code'   => 'required',
+            'locale' => 'required',
+        ]);
 });

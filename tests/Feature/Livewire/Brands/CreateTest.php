@@ -6,8 +6,6 @@ use App\Livewire\Brands\Create;
 use App\Models\Brand;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the brand create component if working', function () {
     $this->loginAsAdmin();
 
@@ -21,14 +19,14 @@ it('tests the brand create component', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('brand.name', 'apple')
-        ->set('brand.description', 'Apple description')
+        ->set('name', 'apple')
+        ->set('description', 'Apple description')
         ->call('create')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('brands', [
+    $this->assertDatabaseHas('brands', [
         'name'        => 'apple',
-        'description' => 'some description',
+        'description' => 'Apple description',
     ]);
 });
 
@@ -37,22 +35,20 @@ it('tests the create brand component validation', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('brand.name', '')
+        ->set('name', '')
         ->call('create')
         ->assertHasErrors(
-            ['brand.name' => 'required'],
+            ['name' => 'required'],
         );
 });
 
 it('throws an error if the brand name is duplicated', function () {
     $this->loginAsAdmin();
 
-    Brand::create([
-        'name' => 'apple',
-    ]);
+    Brand::factory()->create(['name' => 'apple']);
 
     Livewire::test(Create::class)
-        ->set('brand.name', 'apple')
+        ->set('name', 'apple')
         ->call('create')
         ->assertHasErrors(
             ['name' => 'The brand name has already been taken.'],

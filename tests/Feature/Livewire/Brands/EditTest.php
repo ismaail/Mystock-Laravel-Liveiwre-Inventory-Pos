@@ -18,17 +18,21 @@ it('tests the brand edit component', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
 
-    $brand = Brand::factory()->create();
+    $brand = Brand::factory()->create([
+        'name' => 'Old Name',
+        'description' => 'Old Description',
+    ]);
 
-    Livewire::test(Edit::class, ['id' => $brand->id])
-        ->set('brand.name', 'apple')
-        ->set('brand.description', 'some description')
+    Livewire::test(Edit::class)
+        ->set('brand', $brand)
+        ->set('name', 'apple')
+        ->set('description', 'new description')
         ->call('update')
         ->assertHasNoErrors();
 
-    $brand = Brand::find(1);
+    $brand->refresh();
     expect($brand->name)->toBe('apple');
-    expect($brand->description)->toBe('some description');
+    expect($brand->description)->toBe('new description');
 });
 
 it('tests the update brand component validation', function () {
@@ -38,10 +42,11 @@ it('tests the update brand component validation', function () {
     $brand = Brand::factory()->create();
 
     Livewire::test(Edit::class, ['id' => $brand->id])
-        ->set('brand.name', '')
-        ->set('brand.description', '')
+        ->set('brand', $brand)
+        ->set('name', '')
+        ->set('description', '')
         ->call('update')
         ->assertHasErrors(
-            ['brand.name' => 'required'],
+            ['name' => 'required'],
         );
 });

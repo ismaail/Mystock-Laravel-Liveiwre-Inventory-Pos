@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\Livewire\Suppliers\Create;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseHas;
-
 it('test the supplier create component if working', function () {
     $this->withoutExceptionHandling();
     $this->loginAsAdmin();
@@ -21,14 +19,14 @@ it('tests the create supplier component', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('supplier.name', 'John doe')
-        ->set('supplier.phone', '00000000000')
-        ->set('supplier.email', 'supplier@gmail.com')
-        ->set('supplier.city', 'casablanca')
+        ->set('name', 'John doe')
+        ->set('phone', '00000000000')
+        ->set('email', 'supplier@gmail.com')
+        ->set('city', 'casablanca')
         ->call('create')
         ->assertHasNoErrors();
 
-    assertDatabaseHas('suppliers', [
+    $this->assertDatabaseHas('suppliers', [
         'name'  => 'John doe',
         'phone' => '00000000000',
         'email' => 'supplier@gmail.com',
@@ -41,13 +39,13 @@ it('tests the create supplier component validation', function () {
     $this->loginAsAdmin();
 
     Livewire::test(Create::class)
-        ->set('supplier.name', '')
-        ->set('supplier.phone', '')
-        ->set('supplier.email', '')
-        ->set('supplier.city', '')
+        ->set('name', '')
+        ->set('phone', '')
+        ->set('email', '')
+        ->set('city', '')
         ->call('create')
-        ->assertHasErrors(
-            ['supplier.name' => 'required'],
-            ['supplier.phonne' => 'required']
-        );
+        ->assertHasErrors([
+            'name' => 'required',
+            'phone' => 'required',
+        ]);
 });
