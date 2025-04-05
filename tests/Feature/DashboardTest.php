@@ -6,22 +6,20 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-/**
- * Class DashboardTest.
- */
 class DashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function unauthenticated_users_cant_access_admin_dashboard()
     {
         $this->get('/admin')->assertRedirect('/login');
     }
 
-    /** @test */
+    #[Test]
     public function not_authorized_users_cant_access_admin_dashboard()
     {
         $this->actingAs(User::factory()->create());
@@ -31,7 +29,7 @@ class DashboardTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /** @test */
+    #[Test]
     public function admin_can_access_admin_dashboard()
     {
         $this->loginAsAdmin();
