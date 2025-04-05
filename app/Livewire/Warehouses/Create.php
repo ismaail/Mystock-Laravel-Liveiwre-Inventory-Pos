@@ -34,6 +34,7 @@ class Create extends Component
     #[Validate('max:255')]
     public $city;
 
+    #[Validate('nullable')]
     #[Validate('email')]
     #[Validate('max:255')]
     public $email;

@@ -24,6 +24,7 @@ class Create extends Component
 
     #[Validate('required', message: 'Please provide a name')]
     #[Validate('min:3', message: 'This name is too short')]
+    #[Validate('unique:brands,name', message: 'The brand name has already been taken.')]
     public string $name;
 
     public $description;
