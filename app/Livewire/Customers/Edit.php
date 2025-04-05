@@ -20,10 +20,9 @@ class Edit extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $editModal = false;
+    public bool $editModal = false;
 
-    /** @var mixed */
-    public $customer;
+    public Customer $customer;
 
     #[Validate('required', message: 'The name field is required')]
     #[Validate('min:3', message: 'The name field must be more than 3 characters.')]

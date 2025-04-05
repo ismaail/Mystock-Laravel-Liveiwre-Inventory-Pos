@@ -18,8 +18,7 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    /** @var bool */
-    public $createModal = false;
+    public bool $createModal = false;
 
     public Category $category;
 
