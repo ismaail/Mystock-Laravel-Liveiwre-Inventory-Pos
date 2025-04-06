@@ -29,6 +29,8 @@ jobs:
           MYSQL_USER: tester
           MYSQL_PASSWORD: test
           MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -56,7 +58,7 @@ jobs:
         run: composer show -D
 
       - name: Copy .evn file
-        run: cp .env.example .env
+        run: cp .env.ci .env
 
       - name: Generate key
         run: php artisan key:generate
