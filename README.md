@@ -131,17 +131,18 @@ We welcome contributions of all kinds! Here's how you can help:
 - 🔧 Submit pull requests
 
 ## Contributors
+## Contributors
 
 | Contributor | GitHub Profile |
 | --- | --- |
 | [Zakarialabib](https://github.com/Zakarialabib) | [![Avatar](https://github.com/Zakarialabib.png?size=50)](https://github.com/Zakarialabib) |
+| [dependabot[bot]](https://github.com/dependabot[bot]) | [![Avatar](https://github.com/dependabot[bot].png?size=50)](https://github.com/dependabot[bot]) |
 | [elmarzouguidev](https://github.com/elmarzouguidev) | [![Avatar](https://github.com/elmarzouguidev.png?size=50)](https://github.com/elmarzouguidev) |
 | [bilton30](https://github.com/bilton30) | [![Avatar](https://github.com/bilton30.png?size=50)](https://github.com/bilton30) |
 | [ismaail](https://github.com/ismaail) | [![Avatar](https://github.com/ismaail.png?size=50)](https://github.com/ismaail) |
-| [yassinebenaid](https://github.com/yassinebenaid) | [![Avatar](https://github.com/yassinebenaid.png?size=50)](https://github.com/yassinebenaid) |
 | [slaweallx](https://github.com/slaweallx) | [![Avatar](https://github.com/slaweallx.png?size=50)](https://github.com/slaweallx) |
 | [fabyo0](https://github.com/fabyo0) | [![Avatar](https://github.com/fabyo0.png?size=50)](https://github.com/fabyo0) |
+| [yassinebenaid](https://github.com/yassinebenaid) | [![Avatar](https://github.com/yassinebenaid.png?size=50)](https://github.com/yassinebenaid) |
 | [hidjrahs](https://github.com/hidjrahs) | [![Avatar](https://github.com/hidjrahs.png?size=50)](https://github.com/hidjrahs) |
+| [actions-user](https://github.com/actions-user) | [![Avatar](https://github.com/actions-user.png?size=50)](https://github.com/actions-user) |
 | [josecarpio99](https://github.com/josecarpio99) | [![Avatar](https://github.com/josecarpio99.png?size=50)](https://github.com/josecarpio99) |
-
-
