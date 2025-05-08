@@ -31,7 +31,8 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
         ports:
           - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: -health-cmd="MYSQL_PWD=test mysqladmin ping -h localhost -u my_stock_test || exit 1 --health-interval=10s --health-timeout=10s --health-retries=5"
 
     steps:
       - name: Checkout code
